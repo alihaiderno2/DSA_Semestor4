@@ -1,3 +1,6 @@
+/*Name :Ali Haider
+Roll Number : BITF24M004
+Section : Morning*/
 #include "UnsortedList.h"
 #include <iostream>
 using namespace std;
@@ -133,7 +136,7 @@ UnsortedList &UnsortedList::operator=(UnsortedList &rhs)
     }
     return *this;
 }
-bool UnsortedList::operator==(UnsortedList &rhs) const
+bool UnsortedList::operator==(UnsortedList &rhs)const
 {
     if (currSize != rhs.currSize)
     {
@@ -228,107 +231,85 @@ int UnsortedList::removeAll4(int val)
     currSize -= count;
     return count;
 }
-bool UnsortedList::search(int value)
-{
-    for (int i = 0; i < currSize; i++)
-    {
-        if (arr[i] == value)
-        {
+bool UnsortedList::search(int value) {
+    for (int i = 0; i < currSize; i++) {
+        if (arr[i] == value) {
             return true;
         }
     }
     return false;
 }
-bool UnsortedList::removeMax(int &maxVal)
-{
-    if (currSize == 0)
-    {
+bool UnsortedList::removeMax(int& maxVal){
+    if(currSize== 0){
         return false;
     }
     int max = INT_MIN;
-    for (int i = 0; i < currSize; i++)
-    {
-        if (arr[i] > max)
-        {
+    for(int i=0;i<currSize;i++){
+        if(arr[i]>max){
             max = arr[i];
         }
     }
     bool removed = false;
-    int i = 0;
-    while (!removed && i < currSize)
-    {
-        if (arr[i] == max)
-        {
-            remove2(i, maxVal);
-            removed = true;
+    int i=0;
+    while(!removed && i<currSize){
+        if(arr[i] == max){
+            remove2(i,maxVal);
+            removed= true;
         }
         i++;
     }
-    if (currSize == 0)
-        return false;
+    if(currSize == 0) return false;
     return true;
 }
-void UnsortedList::reverse()
-{
-    int start = 0, end = currSize - 1;
-    while (start < end)
-    {
-        swap(arr[start], arr[end]);
+void UnsortedList::reverse(){
+    int start = 0,end = currSize - 1;
+    while(start < end){
+        swap(arr[start],arr[end]);
         start++;
         end--;
     }
 }
-void UnsortedList::combineList(const UnsortedList &list2)
-{
+void UnsortedList::combineList(const UnsortedList& list2){
     int size = maxSize + list2.maxSize;
-    int *newArr = new int[size];
-    int i = 0;
-    for (; i < currSize; i++)
-    {
+    int* newArr = new int[size];
+    int i=0;
+    for(;i<currSize;i++){
         newArr[i] = arr[i];
     }
-    int j = 0;
-    while (j < list2.currSize)
-    {
+    int j=0;
+    while(j<list2.currSize){
         newArr[i] = list2.arr[j];
         i++;
         j++;
     }
-    delete[] arr;
+    delete [] arr;
     arr = newArr;
     currSize = currSize + list2.currSize;
 }
 // Task4
-int UnsortedList::replaceAll(int oldVal, int newVal)
-{
-    int count = 0;
-    for (int i = 0; i < currSize; i++)
-    {
-        if (arr[i] == oldVal)
-        {
+int UnsortedList::replaceAll(int oldVal, int newVal){
+    int count=0;
+    for(int i=0;i<currSize;i++){
+        if(arr[i] == oldVal){
             arr[i] = newVal;
             count++;
         }
     }
     return count;
 }
-bool UnsortedList::removeLastOccurance(int val)
-{
-    if (currSize == 0)
-    {
+bool UnsortedList::removeLastOccurance(int val){
+    if(currSize == 0){
         return false;
     }
-    int i = currSize - 1;
+    int i = currSize -1;
     bool removed = false;
-    while (!removed && i >= 0)
-    {
-        if (arr[i] == val)
-        {
-            remove1(i, val);
+    while(!removed && i>=0){
+        if(arr[i]== val){
+            remove1(i,val);
             removed = true;
         }
         i--;
-    }
+    } 
     return removed;
 }
 int UnsortedList::removeAll(int val)
@@ -352,121 +333,22 @@ int UnsortedList::removeAll(int val)
     currSize -= count;
     return count;
 }
-bool UnsortedList::isSubset(const UnsortedList &list2) const
-{
-    if (currSize == 0)
-    {
+bool UnsortedList::isSubset (const UnsortedList& list2) const{
+    if(currSize ==0){
         return true;
     }
-    for (int i = 0; i < currSize; i++)
-    {
-        bool found = false;
-        int j = 0;
-        while (!found && j < list2.currSize)
-        {
-            if (arr[i] == list2.arr[j])
-            {
-                found = true;
-            }
-            j++;
-        }
-        if (!found)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-UnsortedList UnsortedList::intersection(const UnsortedList &list2) const
-{
-    if (list2.currSize == 0)
-    {
-        UnsortedList tempList(0);
-        return tempList;
-    }
-    else if (currSize == 0)
-    {
-        UnsortedList tempList(0);
-        return tempList;
-    }
-    else
-    {
-        int size = 0;
-        if (currSize > list2.currSize)
-        {
-            size = currSize;
-        }
-        else
-        {
-            size = list2.currSize;
-        }
-        UnsortedList tempList(size);
-        int counter = 0;
-        for (int i = 0; i < currSize; i++)
-        {
-            for (int j = 0; j < list2.currSize; j++)
-            {
-                if (arr[i] == list2.arr[j])
-                {
-                    // Assuming the list contain no duplicates
-                    tempList.arr[counter] = arr[i];
-                    counter++;
-                }
-            }
-        }
-        tempList.currSize = counter;
-        return tempList;
-    }
-}
-UnsortedList UnsortedList::difference(const UnsortedList &list2) const
-{
-    if (isEmpty())
-    {
-        UnsortedList tempList(0);
-        return tempList;
-    }
-    UnsortedList tempList(currSize);
-    for (int i = 0; i < currSize; i++)
-    {
-        bool found = false;
-        int j = 0;
-        while (!found && j < list2.currSize)
-        {
-            if (arr[i] == list2.arr[j])
-            {
-                found = true;
-            }
-            j++;
-        }
-        if (!found)
-        {
-            tempList.insert(arr[i]);
-        }
-    }
-    return tempList;
-}
-UnsortedList UnsortedList::unionOfLists(const UnsortedList &list2) const
-{
-    UnsortedList tempList(currSize + list2.currSize);
-    int i = 0;
-    while(i< currSize){
-        tempList.insert(arr[i]);
-        i++;
-    }
-    i =0;
-    while(i < list2.currSize){
-        int j = 0;
-        bool found = false;
-        while(!found && j<currSize){
-            if(list2.arr[i] == arr[j]){
+    for(int i=0;i<currSize;i++){
+        bool found= false;
+        int j =0;
+        while(!found && j<list2.currSize){
+            if(arr[i] == list2.arr[j]){
                 found = true;
             }
             j++;
         }
         if(!found){
-            tempList.insert(list2.arr[i]);
+            return false;
         }
-        i++;
     }
-    return tempList;
+    return true;
 }

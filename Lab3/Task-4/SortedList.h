@@ -25,8 +25,8 @@ class SortedList{
         int removeAll(int );
         SortedList(const SortedList& rhs);
         SortedList& operator=(const SortedList& rhs);
-        SortedList intersection(const SortedList &list2) const;
+        SortedList intersection(const SortedList& list2) const;
+        // Task-4 Lab-3
+        // Assuming that the lists contains no duplicate elements
         bool isSubset (const SortedList& list2) const;
-        SortedList difference (const SortedList& list2) const; 
-        SortedList Union (const SortedList& list2) const;
 };

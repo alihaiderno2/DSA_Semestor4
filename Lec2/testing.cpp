@@ -1,12 +1,18 @@
 # include <iostream>
-# include "sortedList.h"
-# include "sortedList.cpp"
+# include "SortedList.h"
+# include "SortedList.cpp"
 using namespace std;
 int main(){
-    sortedList list(64);
-    for(int i=0;i<64;i++){
-        list.insert(i);
+    SortedList list1(18);
+    SortedList list2(5);
+    for(int i=7;i<18;i++){
+        list1.insert(i);
     }
-    list.binarySearch(99);
-    list.display();
+    list1.display();
+    for(int j = 3;j<8;j++){
+        list2.insert(j);
+    }
+    list2.display();
+    SortedList list3 = list1.Union(list2);
+    list3.display();
 }

@@ -1,3 +1,6 @@
+/*Name :Ali Haider
+Roll Number : BITF24M004
+Section : Morning*/
 #include "SortedList.h"
 #include <iostream>
 using namespace std;
@@ -324,7 +327,9 @@ SortedList &SortedList::operator=(const SortedList &rhs)
     }
     return *this;
 }
+// Task-4 Lab-3
 bool SortedList::isSubset (const SortedList& list2) const{
+    //An empty set is subset of all the sets
     if(currSize ==0){
         return true;
     }
@@ -346,116 +351,4 @@ bool SortedList::isSubset (const SortedList& list2) const{
         return true;
     }
     return false;
-}
-// Task-1 Lab-3
-SortedList SortedList::intersection(const SortedList &list2) const
-{
-    if (list2.currSize == 0)
-    {
-        SortedList tempList(0);
-        return tempList;
-    }
-    else if (currSize == 0)
-    {
-        SortedList tempList(0);
-        return tempList;
-    }
-    else
-    {
-        int size = 0;
-        if (currSize > list2.currSize)
-        {
-            size = currSize;
-        }
-        else
-        {
-            size = list2.currSize;
-        }
-        SortedList tempList(size);
-        int counter = 0;
-        int index1 = 0, index2 = 0;
-        while (index1 < currSize && index2 < list2.currSize)
-        {
-            if (arr[index1] == list2.arr[index2])
-            {
-                tempList.arr[counter]  = arr[index1];
-                counter++;
-                index1++;
-                index2++;
-            }
-            else
-            {
-                if (arr[index1] < list2.arr[index2])
-                {
-                    index1++;
-                }
-                else
-                {
-                    index2++;
-                }
-            }
-        }
-        tempList.currSize = counter;
-        return tempList;
-    }
-}
-SortedList SortedList::difference (const SortedList& list2) const{
-    if(isEmpty()){
-        SortedList tempList(0);
-        return tempList;
-    }
-    SortedList tempList(currSize);
-    int i =0,j=0;
-    while(i<currSize && j< list2.currSize){
-        if(arr[i]==list2.arr[j]){
-            i++;
-            j++;
-        }
-        else if(arr[i] < list2.arr[j]){
-            tempList.insert(arr[i]);
-            i++;
-        }
-        else{
-            j++;
-        }
-    }
-    while(i<currSize){
-        tempList.insert(arr[i]);
-        i++;
-    }
-    return tempList;
-}
-SortedList SortedList::Union(const SortedList& list2) const{
-    if(isEmpty()){
-        return list2;
-    }
-    if(list2.isEmpty()){
-        return *this;
-    }
-    SortedList tempList(currSize + list2.currSize);
-    int i = 0,j =0;
-    while(i<currSize && j< list2.currSize){
-        if(arr[i]==list2.arr[j]){
-            tempList.insert(arr[i]);
-            i++;
-            j++;
-        }
-        else if(arr[i] < list2.arr[j]){
-            tempList.insert(arr[i]);
-            i++;
-        }
-        else{
-            tempList.insert(list2.arr[j]);
-            j++;
-        }
-    }
-    while(i<currSize){
-        tempList.insert(arr[i]);
-        i++;
-    }
-    while(j<list2.currSize){
-        tempList.insert(list2.arr[j]);
-        j++;
-    }
-    return tempList;
 }

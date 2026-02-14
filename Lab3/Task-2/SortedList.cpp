@@ -1,3 +1,6 @@
+/*Name :Ali Haider
+Roll Number : BITF24M004
+Section : Morning*/
 #include "SortedList.h"
 #include <iostream>
 using namespace std;
@@ -324,30 +327,7 @@ SortedList &SortedList::operator=(const SortedList &rhs)
     }
     return *this;
 }
-bool SortedList::isSubset (const SortedList& list2) const{
-    if(currSize ==0){
-        return true;
-    }
-    int index1 =0;
-    int index2 =0;
-    while(index1 < currSize && index2 < list2.currSize){
-        if(arr[index1] == list2.arr[index2]){
-            index1++;
-            index2++;
-        }
-        else if(arr[index1] > list2.arr[index2]){
-            index2++;
-        }
-        else{
-            return false;
-        }
-    }
-    if(index1 == currSize){
-        return true;
-    }
-    return false;
-}
-// Task-1 Lab-3
+// Task-2 Lab-3
 SortedList SortedList::intersection(const SortedList &list2) const
 {
     if (list2.currSize == 0)
@@ -398,64 +378,4 @@ SortedList SortedList::intersection(const SortedList &list2) const
         tempList.currSize = counter;
         return tempList;
     }
-}
-SortedList SortedList::difference (const SortedList& list2) const{
-    if(isEmpty()){
-        SortedList tempList(0);
-        return tempList;
-    }
-    SortedList tempList(currSize);
-    int i =0,j=0;
-    while(i<currSize && j< list2.currSize){
-        if(arr[i]==list2.arr[j]){
-            i++;
-            j++;
-        }
-        else if(arr[i] < list2.arr[j]){
-            tempList.insert(arr[i]);
-            i++;
-        }
-        else{
-            j++;
-        }
-    }
-    while(i<currSize){
-        tempList.insert(arr[i]);
-        i++;
-    }
-    return tempList;
-}
-SortedList SortedList::Union(const SortedList& list2) const{
-    if(isEmpty()){
-        return list2;
-    }
-    if(list2.isEmpty()){
-        return *this;
-    }
-    SortedList tempList(currSize + list2.currSize);
-    int i = 0,j =0;
-    while(i<currSize && j< list2.currSize){
-        if(arr[i]==list2.arr[j]){
-            tempList.insert(arr[i]);
-            i++;
-            j++;
-        }
-        else if(arr[i] < list2.arr[j]){
-            tempList.insert(arr[i]);
-            i++;
-        }
-        else{
-            tempList.insert(list2.arr[j]);
-            j++;
-        }
-    }
-    while(i<currSize){
-        tempList.insert(arr[i]);
-        i++;
-    }
-    while(j<list2.currSize){
-        tempList.insert(list2.arr[j]);
-        j++;
-    }
-    return tempList;
 }

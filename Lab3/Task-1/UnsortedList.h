@@ -30,8 +30,7 @@ class UnsortedList{
         int replaceAll(int, int);
         bool removeLastOccurance(int );
         int removeAll(int val);
-        UnsortedList intersection(const UnsortedList &list2) const;
-        bool isSubset (const UnsortedList& list2) const;
-        UnsortedList difference (const UnsortedList& list2) const;
-        UnsortedList unionOfLists (const UnsortedList& list2) const;
+        // Task-1 Lab-3
+        // Assuming that the lists contains no duplicate elements
+        UnsortedList intersection (const UnsortedList& list2) const;
 };
