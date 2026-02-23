@@ -29,4 +29,5 @@ class SortedList{
         bool isSubset (const SortedList& list2) const;
         SortedList difference (const SortedList& list2) const; 
         SortedList Union (const SortedList& list2) const;
+        SortedList symmetricDifference(const SortedList& list2)const;
 };

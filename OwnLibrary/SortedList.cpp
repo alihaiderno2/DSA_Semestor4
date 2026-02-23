@@ -466,3 +466,35 @@ Difference, Move both,  "Add A,   move i",Move j,Add remaining from A
 IsSubset,   Move both,  Return False,Move j,Check if i finished
 Intersection,   "Add A,  move both",Move i,Move j,None
 */
+SortedList SortedList::symmetricDifference(const SortedList& list2)const{
+    SortedList tempList(currSize+list2.currSize);
+    int i =0,j=0,val = 0;
+    while(i<currSize && j<list2.currSize){
+        if(arr[i] == list2.arr[j]){
+            i++;
+            j++;
+        }
+        else if(arr[i]<list2.arr[j]){
+            tempList.arr[val] = arr[i];
+            i++;
+            val++;
+        }
+        else{
+            tempList.arr[val] = list2.arr[j];
+            j++;
+            val++;
+        }
+    }
+    while(i<currSize){
+        tempList.arr[val] = arr[i];
+        i++;
+        val++;
+    }
+    while(j<list2.currSize){
+        tempList.arr[val]  = list2.arr[j];
+        j++;
+        val++;
+    }
+    tempList.currSize = val;
+    return tempList;
+}
