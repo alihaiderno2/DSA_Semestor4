@@ -50,3 +50,25 @@ void LibraryFunctions::selectionSortReverse(int* a,int n){
         intSwap(a[i],a[max]);
     }
 }
+void LibraryFunctions::insertionSort(int* a, int n){
+    for(int i = 1;i<n;i++){
+        int j = i-1;
+        int val = a[i];
+        while(j>=0 && val<a[j]){
+            a[j+1] = a[j];
+            j--;
+        }
+        a[j+1] = val;
+    }
+}
+void LibraryFunctions::insertionSortReverse(int* a, int n){
+    for(int i = 1;i<n;i++){
+        int j = i-1;
+        int val = a[i];
+        while(j>=0 && a[j]<val){
+            a[j+1] = a[j];
+            j--;
+        }
+        a[j+1] = val;
+    }
+}

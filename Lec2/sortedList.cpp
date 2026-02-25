@@ -459,3 +459,27 @@ SortedList SortedList::Union(const SortedList& list2) const{
     }
     return tempList;
 }
+int SortedList::comparison(const SortedList& list2) const{
+    int i = 0,j=0;
+    bool equal = true;
+    while(i<currSize && j<list2.currSize){
+        if(arr[i] == list2.arr[j]){
+            i++;
+            j++;
+        }
+        else if(arr[i] < list2.arr[j]){
+            return -1;
+        }
+        else if(arr[i]>list2.arr[j]){
+            return 1;
+        }
+    }
+    if(currSize<list2.currSize){
+        return -1;
+    }
+    else if(currSize == list2.currSize){
+        return 0;
+    }else{
+        return 1;
+    }
+}
