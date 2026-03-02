@@ -1,4 +1,22 @@
 #include "LibraryFunctions.h"
+# include "Stack.h"
+# include <iostream>
+using namespace std;
+int LibraryFunctions::logBase2(int num){
+    if(num<=0){
+        return -1;
+    }
+    else if(num == 1){
+        return 0;
+    }
+    int i = 0;
+    int powers = 2;
+    while(powers<= num){
+        powers*=2;
+        i++;
+    }
+    return i;
+}
 void LibraryFunctions::intSwap(int &a, int &b)
 {
     int temp = a;
@@ -70,5 +88,28 @@ void LibraryFunctions::insertionSortReverse(int* a, int n){
             j--;
         }
         a[j+1] = val;
+    }
+}
+void LibraryFunctions::selectionSortByFindMax(int* a,int n){
+    for(int i=n-1;i>0;i--){
+        int max = i;
+        for(int j=i-1;j>=0;j--){
+            if(a[j]>a[max]){
+                max = j;
+            }
+        }
+        intSwap(a[i],a[max]);
+    }
+}
+void LibraryFunctions::decimalToBinaryConversion(int num){
+    Stack s(logBase2(num)+1);
+    while(num>0){
+        s.push(num%2);
+        num/=2;
+    }
+    while(!s.isEmpty()){
+        int value;
+        s.pop(value);
+        cout<<value;
     }
 }

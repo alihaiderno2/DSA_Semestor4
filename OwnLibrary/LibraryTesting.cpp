@@ -3,6 +3,7 @@
 # include "SortedList.cpp"
 #include "LibraryFunctions.h"
 # include "LibraryFunctions.cpp"
+# include "Stack.cpp"
 using namespace std;
 int main(){
     // SortedList list1(6);
@@ -16,10 +17,6 @@ int main(){
     // }
     // SortedList temp = list1.Union(list2);
     // temp.display();
-    int arr[7] = {1,5,2,8,3,5,2};
     LibraryFunctions lib;
-    lib.insertionSortReverse(arr,7);
-    for(int i=0;i<7;i++){
-        cout<<arr[i]<<endl;
-    }
+    lib.decimalToBinaryConversion(10);
 }

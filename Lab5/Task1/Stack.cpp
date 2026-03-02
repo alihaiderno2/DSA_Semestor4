@@ -1,3 +1,6 @@
+/*Name :Ali Haider
+Roll Number : BITF24M004
+Section : Morning*/
 #include "Stack.h"
 #include <iostream>
 using namespace std;
