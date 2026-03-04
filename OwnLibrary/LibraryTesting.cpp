@@ -4,6 +4,9 @@
 #include "LibraryFunctions.h"
 # include "LibraryFunctions.cpp"
 # include "Stack.cpp"
+# include "Stack.h"
+# include "StackChar.cpp"
+# include "StackChar.h"
 using namespace std;
 int main(){
     // SortedList list1(6);
@@ -18,5 +21,7 @@ int main(){
     // SortedList temp = list1.Union(list2);
     // temp.display();
     LibraryFunctions lib;
-    lib.decimalToBinaryConversion(10);
+    char ch[14] = "a+b*(c-d)>e+f";
+    string infix = lib.infixToPostfix(ch);
+    cout<<infix<<endl;
 }

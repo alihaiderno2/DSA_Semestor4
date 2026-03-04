@@ -13,4 +13,7 @@ class LibraryFunctions
         void insertionSortReverse(int* a,int n);
         void decimalToBinaryConversion(int num);
         int logBase2(int num);
+        int evaluationOfPostfixExpression(const char* exp);
+        string infixToPostfix(string);
+        int getPrecedence(char op);
 };
