@@ -11,9 +11,8 @@ Queue::Queue(int s)
         q = nullptr;
     }
     currSize = 0;
-    first = -1;
-    last = -1;
-    queued = -1;
+    front = 0;
+    back = -1;
 }
 Queue::~Queue()
 {
@@ -46,18 +45,9 @@ bool Queue::enqueue(int val)
 {
     if (!isFull())
     {
-        if(first == -1){
-            first++;
-            last++;
-        }
-        else{
-            last++;
-        }
-        if (last == maxSize)
-        {
-            last = 0;
-        }
-        q[last] = val;
+        back++;
+        back = back % maxSize;
+        q[back] = val;
         currSize++;
         return true;
     }
@@ -74,16 +64,14 @@ bool Queue::dequeue(int &val)
     }
     else
     {
-        val = q[first];
-        first++;
-        if(first == maxSize){
-            first = 0;
-        }
+        val = q[front];
+        front++;
+        front = front % maxSize;
         currSize--;
         if (currSize == 0)
         {
-            first = -1;
-            last = -1;
+            front = 0;
+            back = -1;
         }
         return true;
     }

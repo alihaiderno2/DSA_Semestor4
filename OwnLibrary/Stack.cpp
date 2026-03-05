@@ -24,6 +24,43 @@ Stack::~Stack()
         st = nullptr;
     }
 }
+Stack::Stack(const Stack& temp){
+    maxSize = temp.maxSize;
+    if(maxSize == 0){
+        st = nullptr;
+    }
+    else{
+        st = new int[maxSize];
+        for(int i = 0; i < maxSize; i++){
+            st[i] = temp.st[i];
+        }
+    }
+    currSize = temp.currSize;
+    top = temp.top;
+}
+Stack& Stack::operator=(const Stack& temp){
+    if(this == &temp){
+        return *this;
+    }
+    else{
+        if(maxSize > 0){
+            delete[] st;
+        }
+        maxSize = temp.maxSize;
+        if(maxSize == 0){
+            st = nullptr;
+        }
+        else{
+            st = new int[maxSize];
+            for(int i = 0; i < maxSize; i++){
+                st[i] = temp.st[i];
+            }
+        }
+        currSize = temp.currSize;
+        top = temp.top;
+        return *this;
+    }
+}
 bool Stack::push(int val)
 {
     if (isFull())

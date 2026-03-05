@@ -8,6 +8,7 @@ class Stack
         int top;
     public:
         Stack(int s);
+        Stack(const Stack&);
         ~Stack();
         bool push(int val);
         bool pop(int &val);
@@ -15,4 +16,5 @@ class Stack
         bool isEmpty() const;
         bool isFull() const;
         void displayHelper() const;
+        Stack& operator=(const Stack&);
 };

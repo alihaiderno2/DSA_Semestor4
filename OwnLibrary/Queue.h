@@ -4,9 +4,8 @@ class Queue{
         int* q;
         int currSize;
         int maxSize;
-        int first;
-        int last;
-        int queued;
+        int front;
+        int back;
     public:
         Queue(int );
         ~Queue();
