@@ -7,6 +7,8 @@
 # include "Stack.h"
 # include "StackChar.cpp"
 # include "StackChar.h"
+# include "StackString.cpp"
+# include "StackString.h"
 using namespace std;
 int main(){
     // SortedList list1(6);
@@ -21,7 +23,7 @@ int main(){
     // SortedList temp = list1.Union(list2);
     // temp.display();
     LibraryFunctions lib;
-    char ch[14] = "a+b*(c-d)>e+f";
-    string infix = lib.infixToPostfix(ch);
+    string line = "(a+b*(c-d)&&a+b)>=e+f";
+    string infix = lib.infixToPostfix(line);
     cout<<infix<<endl;
 }

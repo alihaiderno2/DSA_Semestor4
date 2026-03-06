@@ -1,6 +1,7 @@
 #include "LibraryFunctions.h"
 #include "Stack.h"
 #include "StackChar.h"
+#include "StackString.h"
 #include <iostream>
 using namespace std;
 int LibraryFunctions::logBase2(int num)
@@ -191,19 +192,20 @@ int LibraryFunctions::evaluationOfPostfixExpression(const char *exp)
 }
 string LibraryFunctions::infixToPostfix(string infix)
 {
-    string postfix;
-    StackChar operands(100);
+    string postfix = "";
+    StackString operands(100);
     for (int i = 0; infix[i]!='\0';i++){
-        char ch = infix[i];
-        if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
+        string ch ="";
+        ch += infix[i];
+        if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9")) {
             postfix += ch;
         }
-        else if(ch == '('){
+        else if(ch == "("){
             operands.push(ch);
         }
-        else if(ch == ')'){
-            char top;
-            while(!operands.isEmpty() &&  (operands.topVal(top) && top != '(')){
+        else if(ch == ")"){
+            string top;
+            while(!operands.isEmpty() &&  (operands.topVal(top) && top != "(")){
                 postfix += top;
                 operands.pop(top);
             }
@@ -212,26 +214,60 @@ string LibraryFunctions::infixToPostfix(string infix)
             }
         }
         else{
-            char top;
-            while(!operands.isEmpty() && (operands.topVal(top) && getPrecedence(top) >= getPrecedence(ch))){
+            string op = "";
+            op += ch;
+            if (i + 1 < infix.length()){
+                char next = infix[i + 1];
+                if ((ch == "<" || ch == ">" || ch == "=" || ch == "!" || ch == "+" || ch == "-" || ch == "&" || ch == "|") 
+                     && (next == '=' || next == '&' || next == '|' || next == '+' || next == '-')){
+
+                        string combined = op + next;
+                        if (combined == "<=" || combined == ">=" || combined == "==" || combined == "!=" || 
+                            combined == "&&" || combined == "||" || combined == "++" || combined == "--") {
+                            op = combined;
+                            i++; 
+                        }
+                     }
+            }
+            string top;
+            while(!operands.isEmpty() && (operands.topVal(top) && top != "(" && getPrecedence(top) <= getPrecedence(op))){
                 postfix += top;
                 operands.pop(top);
             }
-            operands.push(ch);
+            operands.push(op);
         }
     }
     while(!operands.isEmpty()){
-        char top;
+        string top;
         operands.pop(top);
         postfix += top;
     }
     return postfix;
 }
-int LibraryFunctions::getPrecedence(char op) {
+int LibraryFunctions::getPrecedence(string op) {
 
-    if (op == '^') return 3;
-    if (op == '*' || op == '/') return 2;
-    if (op == '+' || op == '-') return 1;
-    if (op == '<' || op == '>' ) return 0;
-    return -1; // For '(' and any non-operator characters
+    if(op == "~" || op == "!" || op == "++" || op == "--"){
+        return 1;
+    }
+    else if(op == "*" || op == "/" || op == "%"){
+        return 2;
+    }
+    else if(op == "+" || op == "-"){
+        return 3;
+    }
+    else if(op == ">" || op == "<" || op == ">=" || op == "<="){
+        return 4;
+    }
+    else if(op == "==" || op == "!="){
+        return 5;
+    }
+    else if(op == "&&"){
+        return 6;
+    }
+    else if(op == "||"){
+        return 7;
+    }
+    else{
+        return 8;
+    }
 }

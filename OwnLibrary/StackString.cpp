@@ -1,7 +1,7 @@
-#include "StackChar.h"
+#include "StackString.h"
 #include <iostream>
 using namespace std;
-StackChar::StackChar(int s)
+StackString::StackString(int s)
 {
     maxSize = s;
     if (maxSize <= 0)
@@ -11,12 +11,12 @@ StackChar::StackChar(int s)
     }
     else
     {
-        st = new char[maxSize];
+        st = new string[maxSize];
     }
     currSize = 0;
     top = -1;
 }
-StackChar::~StackChar()
+StackString::~StackString()
 {
     if (st != nullptr)
     {
@@ -24,7 +24,7 @@ StackChar::~StackChar()
         st = nullptr;
     }
 }
-bool StackChar::push(char val)
+bool StackString::push(string val)
 {
     if (isFull())
     {
@@ -38,7 +38,7 @@ bool StackChar::push(char val)
         return true;
     }
 }
-bool StackChar::pop(char &val)
+bool StackString::pop(string &val)
 {
     if (isEmpty())
     {
@@ -52,7 +52,7 @@ bool StackChar::pop(char &val)
         return true;
     }
 }
-bool StackChar::topVal(char &val) const
+bool StackString::topVal(string &val) const
 {
     if (isEmpty())
     {
@@ -64,7 +64,7 @@ bool StackChar::topVal(char &val) const
         return true;
     }
 }
-bool StackChar::isEmpty() const
+bool StackString::isEmpty() const
 {
     if (currSize == 0)
     {
@@ -75,7 +75,7 @@ bool StackChar::isEmpty() const
         return false;
     }
 }
-bool StackChar::isFull() const
+bool StackString::isFull() const
 {
     if (currSize == maxSize)
     {
@@ -86,7 +86,7 @@ bool StackChar::isFull() const
         return false;
     }
 }
-void StackChar::displayHelper() const
+void StackString::displayHelper() const
 {
     for (int i = top; i >= 0; i--)
     {

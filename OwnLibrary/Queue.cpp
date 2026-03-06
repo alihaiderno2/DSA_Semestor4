@@ -22,6 +22,53 @@ Queue::~Queue()
         q = nullptr;
     }
 }
+Queue::Queue(const Queue &other)
+{
+    maxSize = other.maxSize;
+    currSize = other.currSize;
+    front = other.front;
+    back = other.back;
+    if (other.q != nullptr)
+    {
+        q = new int[maxSize];
+        for (int i = 0; i < maxSize; i++)
+        {
+            q[i] = other.q[i];
+        }
+    }
+    else
+    {
+        q = nullptr;
+    }
+}
+Queue& Queue::operator=(const Queue &other)
+{
+    if(this == &other){
+        return *this;
+    }
+    maxSize = other.maxSize;
+    currSize = other.currSize;
+    front = other.front;
+    back = other.back;
+    if (q != nullptr)
+    {
+        delete[] q;
+        q = nullptr;
+    }
+    if (other.q != nullptr)
+    {
+        q = new int[maxSize];
+        for (int i = 0; i < maxSize; i++)
+        {
+            q[i] = other.q[i];
+        }
+    }
+    else
+    {
+        q = nullptr;
+    }
+    return *this;
+}
 bool Queue::isEmpty() const
 {
     if (currSize == 0)

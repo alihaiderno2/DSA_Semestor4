@@ -2,7 +2,7 @@
 class StackChar
 {
     private:
-        int* st;
+        char* st;
         int maxSize;
         int currSize;
         int top;

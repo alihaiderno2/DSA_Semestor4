@@ -9,6 +9,8 @@ class Queue{
     public:
         Queue(int );
         ~Queue();
+        Queue(const Queue& );
+        Queue& operator=(const Queue& );
         bool isEmpty()const;
         bool isFull()const;
         bool enqueue(int );

@@ -15,5 +15,5 @@ class LibraryFunctions
         int logBase2(int num);
         int evaluationOfPostfixExpression(const char* exp);
         string infixToPostfix(string);
-        int getPrecedence(char op);
+        int getPrecedence(string op);
 };
