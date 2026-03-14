@@ -1,0 +1,15 @@
+7
+Mohammad Amir
+3 16
+Junaid Khan
+1 20
+Mohammad Hafeez
+0 13
+Hasan Ali
+3 19
+Shadab Khan
+2 60
+Imad Wasim
+0 3
+Fakhar Zaman
+0 25

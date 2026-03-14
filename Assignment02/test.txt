@@ -1,0 +1,13 @@
+6
+Shaheen
+0 60
+Rauf
+4 40
+Naseem
+4 40
+Wasim
+2 15
+Shadab
+2 15
+Imad
+0 12

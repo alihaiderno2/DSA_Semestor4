@@ -1,0 +1,5 @@
+13.8
+20
+Too few operands for operator: *
+Too few Operators
+Invalid operator: &
