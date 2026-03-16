@@ -194,80 +194,153 @@ string LibraryFunctions::infixToPostfix(string infix)
 {
     string postfix = "";
     StackString operands(100);
-    for (int i = 0; infix[i]!='\0';i++){
-        string ch ="";
+    for (int i = 0; infix[i] != '\0'; i++)
+    {
+        string ch = "";
         ch += infix[i];
-        if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9")) {
+        if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9"))
+        {
             postfix += ch;
         }
-        else if(ch == "("){
+        else if (ch == "(")
+        {
             operands.push(ch);
         }
-        else if(ch == ")"){
+        else if (ch == ")")
+        {
             string top;
-            while(!operands.isEmpty() &&  (operands.topVal(top) && top != "(")){
+            while (!operands.isEmpty() && (operands.topVal(top) && top != "("))
+            {
                 postfix += top;
                 operands.pop(top);
             }
-            if(!operands.isEmpty()){
+            if (!operands.isEmpty())
+            {
                 operands.pop(top);
             }
         }
-        else{
+        else
+        {
             string op = "";
             op += ch;
-            if (i + 1 < infix.length()){
+            if (i + 1 < infix.length())
+            {
                 char next = infix[i + 1];
-                if ((ch == "<" || ch == ">" || ch == "=" || ch == "!" || ch == "+" || ch == "-" || ch == "&" || ch == "|") 
-                     && (next == '=' || next == '&' || next == '|' || next == '+' || next == '-')){
+                if ((ch == "<" || ch == ">" || ch == "=" || ch == "!" || ch == "+" || ch == "-" || ch == "&" || ch == "|") && (next == '=' || next == '&' || next == '|' || next == '+' || next == '-'))
+                {
 
-                        string combined = op + next;
-                        if (combined == "<=" || combined == ">=" || combined == "==" || combined == "!=" || 
-                            combined == "&&" || combined == "||" || combined == "++" || combined == "--") {
-                            op = combined;
-                            i++; 
-                        }
-                     }
+                    string combined = op + next;
+                    if (combined == "<=" || combined == ">=" || combined == "==" || combined == "!=" ||
+                        combined == "&&" || combined == "||" || combined == "++" || combined == "--")
+                    {
+                        op = combined;
+                        i++;
+                    }
+                }
             }
             string top;
-            while(!operands.isEmpty() && (operands.topVal(top) && top != "(" && getPrecedence(top) <= getPrecedence(op))){
+            while (!operands.isEmpty() && (operands.topVal(top) && top != "(" && getPrecedence(top) <= getPrecedence(op)))
+            {
                 postfix += top;
                 operands.pop(top);
             }
             operands.push(op);
         }
     }
-    while(!operands.isEmpty()){
+    while (!operands.isEmpty())
+    {
         string top;
         operands.pop(top);
         postfix += top;
     }
     return postfix;
 }
-int LibraryFunctions::getPrecedence(string op) {
+int LibraryFunctions::getPrecedence(string op)
+{
 
-    if(op == "~" || op == "!" || op == "++" || op == "--"){
+    if (op == "~" || op == "!" || op == "++" || op == "--")
+    {
         return 1;
     }
-    else if(op == "*" || op == "/" || op == "%"){
+    else if (op == "*" || op == "/" || op == "%")
+    {
         return 2;
     }
-    else if(op == "+" || op == "-"){
+    else if (op == "+" || op == "-")
+    {
         return 3;
     }
-    else if(op == ">" || op == "<" || op == ">=" || op == "<="){
+    else if (op == ">" || op == "<" || op == ">=" || op == "<=")
+    {
         return 4;
     }
-    else if(op == "==" || op == "!="){
+    else if (op == "==" || op == "!=")
+    {
         return 5;
     }
-    else if(op == "&&"){
+    else if (op == "&&")
+    {
         return 6;
     }
-    else if(op == "||"){
+    else if (op == "||")
+    {
         return 7;
     }
-    else{
+    else
+    {
         return 8;
+    }
+}
+void LibraryFunctions::merge(int *arr, int l1, int l2, int r1, int r2)
+{
+    int size = r2 - l1 + 1;
+    int *temp = new int[size];
+    int i = l1, j = r1;
+    int k = 0;
+    while (i <= l2 && j <= r2)
+    {
+        if (arr[j] < arr[i])
+        {
+            temp[k] = arr[j];
+            j++;
+            k++;
+        }
+        else
+        {
+            temp[k] = arr[i];
+            i++;
+            k++;
+        }
+    }
+    while (i <= l2)
+    {
+        temp[k] = arr[i];
+        i++;
+        k++;
+    }
+    while (j <= r2)
+    {
+        temp[k] = arr[j];
+        j++;
+        k++;
+    }
+    k = 0;
+    while (l1 <= r2)
+    {
+        arr[l1] = temp[k];
+        k++;
+        l1++;
+    }
+    delete[] temp;
+}
+void LibraryFunctions::mergeSort(int *arr, int start, int end)
+{
+    cout << "Inside Merge sort " << start << " " << end << endl;
+    if (start < end)
+    {
+        int mid = (end + start) / 2;
+        mergeSort(arr, start, mid);
+        mergeSort(arr, mid + 1, end);
+        merge(arr, start, mid, mid + 1, end);
     }
 }

@@ -23,7 +23,12 @@ int main(){
     // SortedList temp = list1.Union(list2);
     // temp.display();
     LibraryFunctions lib;
-    string line = "(a+b*(c-d)&&a+b)>=e+f";
-    string infix = lib.infixToPostfix(line);
-    cout<<infix<<endl;
+    // string line = "(a+b*(c-d)&&a+b)>=e+f";
+    // string infix = lib.infixToPostfix(line);
+    // cout<<infix<<endl;
+    int arr[10] = {1,4,2,6,2,1,6,3,2,4};
+    lib.mergeSort(arr,0,9);
+    for(int i = 0;i<10;i++){
+        cout<<arr[i]<<" ";
+    }
 }

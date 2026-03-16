@@ -1,4 +1,6 @@
 # pragma once
+# include <iostream>
+using namespace std;
 class LibraryFunctions
 {
     public:
@@ -16,4 +18,6 @@ class LibraryFunctions
         int evaluationOfPostfixExpression(const char* exp);
         string infixToPostfix(string);
         int getPrecedence(string op);
+        void merge(int* arr,int l1,int l2,int r1,int r2);
+        void mergeSort(int* arr,int start,int end);
 };
