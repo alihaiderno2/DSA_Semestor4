@@ -344,3 +344,29 @@ void LibraryFunctions::mergeSort(int *arr, int start, int end)
         merge(arr, start, mid, mid + 1, end);
     }
 }
+int LibraryFunctions::partition(int* arr,int start,int end){
+    int pivot = arr[start];
+    int i = start, j = end;
+    while(i<j){
+        while (i<= end && arr[i] <= pivot)
+        {
+            i++;
+        }
+        while (j >= 0 && arr[j]> pivot)
+        {
+            j--;
+        }
+        if(i< j){
+            intSwap(arr[i],arr[j]);
+        }
+    }
+    intSwap(arr[start],arr[j]);
+    return j;
+}
+void LibraryFunctions::quickSort(int* arr,int start,int end){
+    if(start<end){
+        int p = partition(arr,start,end);
+        quickSort(arr,start,p-1);
+        quickSort(arr,p+1,end);
+    }
+}

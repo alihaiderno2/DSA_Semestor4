@@ -20,4 +20,6 @@ class LibraryFunctions
         int getPrecedence(string op);
         void merge(int* arr,int l1,int l2,int r1,int r2);
         void mergeSort(int* arr,int start,int end);
+        int partition(int* ,int ,int);
+        void quickSort(int* arr,int start,int end);
 };
