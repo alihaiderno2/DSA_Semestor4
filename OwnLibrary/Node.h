@@ -1,7 +1,9 @@
 # pragma once
 class LinkedList;
+class LinkedStack;
 class Node {
     friend class LinkedList;
+    friend class LinkedStack;
     private:
         int data;
         Node* next;
