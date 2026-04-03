@@ -13,4 +13,9 @@ class LinkedList
         bool search(int);
         int findMax();
         void displayReverse();
+        bool unsortedRemove(int);
+        bool sortedRemove(int);
+        ~LinkedList();
+        LinkedList(LinkedList&);
+        LinkedList& operator=(LinkedList& orig);
 };

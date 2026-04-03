@@ -1,5 +1,5 @@
-#include <Node.h>
-#include <LinkedList.h>
+#include "LinkedList.h"
+#include "Node.h"
 #include <iostream>
 using namespace std;
 LinkedList::LinkedList()
@@ -28,7 +28,7 @@ void LinkedList::insertAtEnd(int val)
     newNode->data = val;
     newNode->next = nullptr;
     Node *curr = head, *prev = nullptr;
-    while (head != nullptr)
+    while (curr != nullptr)
     {
         prev = curr;
         curr = curr->next;
@@ -64,12 +64,13 @@ void LinkedList::sortedInsert(int val)
 bool LinkedList::search(int key)
 {
     Node *temp = head;
-    while (head != nullptr)
+    while (temp != nullptr)
     {
         if (temp->data == key)
         {
             return true;
         }
+        temp = temp->next;
     }
     return false;
 }
@@ -116,9 +117,9 @@ void LinkedList::displayReverse()
         cout << first->data;
         first = first->next;
     }
-    Node *first = nullptr;
-    Node *second = head;
-    Node *third = head->next;
+    first = nullptr;
+    second = head;
+    third = head->next;
     while (second != nullptr)
     {
         second->next = first;
@@ -130,4 +131,103 @@ void LinkedList::displayReverse()
         }
     }
     head = first;
+}
+bool LinkedList::unsortedRemove(int val){
+    Node* curr = head, *prev = nullptr;
+    while(curr!= nullptr && curr->data != val){
+        prev = curr;
+        curr = curr->next;
+    }
+    if(curr == nullptr){// value not found
+        return false;
+    }
+    else if(curr == head){//head is being removed
+        head = curr->next;
+    }
+    else{
+        prev->next = curr->next;
+    }
+    delete curr;
+    curr = nullptr;
+    return true;
+}
+bool LinkedList::sortedRemove(int val){
+    Node* curr = head, *prev = nullptr;
+    while(curr != nullptr && curr->data <val){
+        prev = curr;
+        curr = curr->next;
+    }
+    if(curr == nullptr || curr->data != val)
+    {
+        return false;
+    }
+    else if(curr == head){
+        head = curr->next;
+    }
+    else{
+        prev->next = curr->next;
+    }
+    delete curr;
+    curr = nullptr;
+    return true;
+}
+LinkedList::~LinkedList(){
+    Node* temp = head;
+    while(temp!= nullptr){
+        Node* temp2 = temp->next;
+        delete temp;
+        temp = temp2;
+    }
+    head = nullptr;
+}
+LinkedList::LinkedList(LinkedList& orig){
+    if(orig.head == nullptr){
+        head = nullptr;
+    }
+    else{
+        head = new Node;
+        head->data = orig.head->data;
+
+        Node* p1 = orig.head->next;
+        Node* p2 = head;
+        while(p1!= nullptr){
+            p2->next = new Node;
+            p2 = p2->next;
+            p2->data = p1->data;
+            p1 = p1->next;
+        }
+        p2->next = nullptr;
+    }
+}
+LinkedList& LinkedList::operator=(LinkedList& orig){
+    if(this == &orig){
+        return *this;
+    }
+    else{
+        Node* temp = head;
+        while(temp!= nullptr){
+            Node* temp2 = temp->next;
+            delete temp;
+            temp = temp2;
+        }
+        head = nullptr;
+        if(orig.head == nullptr){
+        head = nullptr;
+        }
+        else{
+            head = new Node;
+            head->data = orig.head->data;
+
+            Node* p1 = orig.head->next;
+            Node* p2 = head;
+            while(p1!= nullptr){
+                p2->next = new Node;
+                p2 = p2->next;
+                p2->data = p1->data;
+                p1 = p1->next;
+            }
+            p2->next = nullptr;
+        }
+        return *this;
+    }
 }
