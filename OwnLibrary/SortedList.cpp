@@ -324,25 +324,32 @@ SortedList &SortedList::operator=(const SortedList &rhs)
     }
     return *this;
 }
-bool SortedList::isSubset (const SortedList& list2) const{
-    if(currSize ==0){
+bool SortedList::isSubset(const SortedList &list2) const
+{
+    if (currSize == 0)
+    {
         return true;
     }
-    int index1 =0;
-    int index2 =0;
-    while(index1 < currSize && index2 < list2.currSize){
-        if(arr[index1] == list2.arr[index2]){
+    int index1 = 0;
+    int index2 = 0;
+    while (index1 < currSize && index2 < list2.currSize)
+    {
+        if (arr[index1] == list2.arr[index2])
+        {
             index1++;
             index2++;
         }
-        else if(arr[index1] > list2.arr[index2]){
+        else if (arr[index1] > list2.arr[index2])
+        {
             index2++;
         }
-        else{
+        else
+        {
             return false;
         }
     }
-    if(index1 == currSize){
+    if (index1 == currSize)
+    {
         return true;
     }
     return false;
@@ -378,7 +385,7 @@ SortedList SortedList::intersection(const SortedList &list2) const
         {
             if (arr[index1] == list2.arr[index2])
             {
-                tempList.arr[counter]  = arr[index1];
+                tempList.arr[counter] = arr[index1];
                 counter++;
                 index1++;
                 index2++;
@@ -399,61 +406,77 @@ SortedList SortedList::intersection(const SortedList &list2) const
         return tempList;
     }
 }
-SortedList SortedList::difference (const SortedList& list2) const{
-    if(isEmpty()){
+SortedList SortedList::difference(const SortedList &list2) const
+{
+    if (isEmpty())
+    {
         SortedList tempList(0);
         return tempList;
     }
     SortedList tempList(currSize);
-    int i =0,j=0;
-    while(i<currSize && j< list2.currSize){
-        if(arr[i]==list2.arr[j]){
+    int i = 0, j = 0;
+    while (i < currSize && j < list2.currSize)
+    {
+        if (arr[i] == list2.arr[j])
+        {
             i++;
             j++;
         }
-        else if(arr[i] < list2.arr[j]){
+        else if (arr[i] < list2.arr[j])
+        {
             tempList.insert(arr[i]);
             i++;
         }
-        else{
+        else
+        {
             j++;
         }
     }
-    while(i<currSize){
+    while (i < currSize)
+    {
         tempList.insert(arr[i]);
         i++;
     }
     return tempList;
 }
-SortedList SortedList::Union(const SortedList& list2) const{
-    if(isEmpty()){
+SortedList SortedList::Union(const SortedList &list2) const
+{
+    if (isEmpty())
+    {
         return list2;
     }
-    if(list2.isEmpty()){
+    if (list2.isEmpty())
+    {
         return *this;
     }
     SortedList tempList(currSize + list2.currSize);
-    int i = 0,j =0;
-    while(i<currSize && j< list2.currSize){
-        if(arr[i]==list2.arr[j]){
+    int i = 0, j = 0;
+    while (i < currSize && j < list2.currSize)
+    {
+        if (arr[i] == list2.arr[j])
+        {
             tempList.insert(arr[i]);
             i++;
             j++;
         }
-        else if(arr[i] < list2.arr[j]){
+        else if (arr[i] < list2.arr[j])
+        {
             tempList.insert(arr[i]);
             i++;
         }
-        else{
+        else
+        {
             tempList.insert(list2.arr[j]);
             j++;
         }
     }
-    while(i<currSize){
+    while (i < currSize)
+    {
         tempList.insert(arr[i]);
         i++;
     }
-    while(j<list2.currSize){
+    while (j < list2.currSize)
+    {
         tempList.insert(list2.arr[j]);
         j++;
     }
@@ -466,32 +489,39 @@ Difference, Move both,  "Add A,   move i",Move j,Add remaining from A
 IsSubset,   Move both,  Return False,Move j,Check if i finished
 Intersection,   "Add A,  move both",Move i,Move j,None
 */
-SortedList SortedList::symmetricDifference(const SortedList& list2)const{
-    SortedList tempList(currSize+list2.currSize);
-    int i =0,j=0,val = 0;
-    while(i<currSize && j<list2.currSize){
-        if(arr[i] == list2.arr[j]){
+SortedList SortedList::symmetricDifference(const SortedList &list2) const
+{
+    SortedList tempList(currSize + list2.currSize);
+    int i = 0, j = 0, val = 0;
+    while (i < currSize && j < list2.currSize)
+    {
+        if (arr[i] == list2.arr[j])
+        {
             i++;
             j++;
         }
-        else if(arr[i]<list2.arr[j]){
+        else if (arr[i] < list2.arr[j])
+        {
             tempList.arr[val] = arr[i];
             i++;
             val++;
         }
-        else{
+        else
+        {
             tempList.arr[val] = list2.arr[j];
             j++;
             val++;
         }
     }
-    while(i<currSize){
+    while (i < currSize)
+    {
         tempList.arr[val] = arr[i];
         i++;
         val++;
     }
-    while(j<list2.currSize){
-        tempList.arr[val]  = list2.arr[j];
+    while (j < list2.currSize)
+    {
+        tempList.arr[val] = list2.arr[j];
         j++;
         val++;
     }

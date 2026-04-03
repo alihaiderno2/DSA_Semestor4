@@ -329,6 +329,7 @@ bool UnsortedList::removeLastOccurance(int val)
         }
         i--;
     }
+    
     return removed;
 }
 int UnsortedList::removeAll(int val)
@@ -449,21 +450,26 @@ UnsortedList UnsortedList::unionOfLists(const UnsortedList &list2) const
 {
     UnsortedList tempList(currSize + list2.currSize);
     int i = 0;
-    while(i< currSize){
+    while (i < currSize)
+    {
         tempList.insert(arr[i]);
         i++;
     }
-    i =0;
-    while(i < list2.currSize){
+    i = 0;
+    while (i < list2.currSize)
+    {
         int j = 0;
         bool found = false;
-        while(!found && j<currSize){
-            if(list2.arr[i] == arr[j]){
+        while (!found && j < currSize)
+        {
+            if (list2.arr[i] == arr[j])
+            {
                 found = true;
             }
             j++;
         }
-        if(!found){
+        if (!found)
+        {
             tempList.insert(list2.arr[i]);
         }
         i++;
