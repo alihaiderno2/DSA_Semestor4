@@ -35,7 +35,8 @@ int main()
         cout << "Error opening file or invalid data." << endl;
         return 0;
     }
-    cout << endl << setw(25) << "--------" << endl;
+    cout << endl
+         << setw(25) << "--------" << endl;
     cout << setw(23) << "MENU" << endl;
     cout << setw(25) << "--------" << endl;
     do
@@ -45,7 +46,8 @@ int main()
         cout << "2. Sort BowlingFigures using Selection sort" << endl;
         cout << "3. Sort BowlingFigures by Name (using Bubble sort) " << endl;
         cout << "4. Quit " << endl;
-        cout<<endl<<"Enter your choice: ";
+        cout << endl
+             << "Enter your choice: ";
         cin >> choice;
         if (choice == 1)
         {
@@ -60,7 +62,7 @@ int main()
             sortByName(bowlingStats, count);
         }
     } while (choice != 4);
-    // Freeing the space acquired 
+    // Freeing the space acquired
     delete[] bowlingStats;
     return 0;
 }
@@ -97,12 +99,12 @@ BowlingFigures *readFromFile(char *fileName, int &count)
 // Simply printing the records
 void printBowlingFigures(const BowlingFigures *bf, int count)
 {
-    cout<<"\n\n";
+    cout << "\n\n";
     for (int i = 0; i < count; i++)
     {
         cout << setw(25) << bf[i].name << "  " << bf[i].wickets << "-" << bf[i].runs << endl;
     }
-    cout<<"\n\n";
+    cout << "\n\n";
 }
 // Sorting using insertion Sort
 void sortBowlingFigures1(BowlingFigures *bf, int count)
@@ -161,15 +163,15 @@ void sortByName(BowlingFigures *bf, int count)
 {
     cout << endl
          << "The " << count << " Bowling figures sorted by name are : " << endl;
-    for (int i = count-1; i > 0; i--)
+    for (int i = count - 1; i > 0; i--)
     {
         for (int j = 0; j < i; j++)
         {
             // using strcmp to compare the names and sorting in increasing order
-            if (strcmp(bf[j].name, bf[j+1].name) > 0)
+            if (strcmp(bf[j].name, bf[j + 1].name) > 0)
             {
-                BowlingFigures temp = bf[j+1];
-                bf[j+1] = bf[j];
+                BowlingFigures temp = bf[j + 1];
+                bf[j + 1] = bf[j];
                 bf[j] = temp;
             }
         }

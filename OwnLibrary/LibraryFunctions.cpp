@@ -370,3 +370,20 @@ void LibraryFunctions::quickSort(int* arr,int start,int end){
         quickSort(arr,p+1,end);
     }
 }
+int LibraryFunctions::partitionWithLastElementAsPivot(int* arr,int s,int e){
+    int p = arr[e];
+    int i = e, j = s;
+    while(i>j){
+        while(i>=0 && arr[i] >= p){
+            i--;
+        }
+        while(j<=e && arr[j] < p){
+            j++;
+        }
+        if(i>j){
+            intSwap(arr[i],arr[j]);
+        }
+    }
+    intSwap(arr[e],arr[j]);
+    return j;
+}

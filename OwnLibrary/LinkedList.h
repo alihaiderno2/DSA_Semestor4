@@ -18,4 +18,13 @@ class LinkedList
         ~LinkedList();
         LinkedList(LinkedList&);
         LinkedList& operator=(LinkedList& orig);
+        Node* mergeSort(Node* head);
+        Node* getMiddle(Node* head);
+        Node* merge(Node* left, Node* right);
+        Node* getHead(){
+            return head;
+        }
+        void setHead(Node* newHead){
+            head = newHead;
+        }
 };

@@ -22,4 +22,5 @@ class LibraryFunctions
         void mergeSort(int* arr,int start,int end);
         int partition(int* ,int ,int);
         void quickSort(int* arr,int start,int end);
+        int partitionWithLastElementAsPivot(int* arr,int start,int end);
 };

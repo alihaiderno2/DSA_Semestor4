@@ -81,5 +81,24 @@ int main() {
     cout << endl;
 
     cout << "\nAll tests completed! Destructors will now fire to clean up memory." << endl;
+
+
+
+    LinkedList lis;
+    lis.insertAtEnd(10);
+    lis.insertAtEnd(0);
+    lis.insertAtEnd(20);
+    lis.insertAtEnd(5);
+    lis.insertAtEnd(15);
+    lis.insertAtEnd(3);
+    lis.display();
+    Node* sortedHead = lis.getHead();
+    Node* sorted = lis.mergeSort(sortedHead);
+    lis.setHead(sorted);
+    lis.display();
+
     return 0;
+
+
+
 }

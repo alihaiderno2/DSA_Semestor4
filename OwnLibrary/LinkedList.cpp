@@ -231,3 +231,57 @@ LinkedList& LinkedList::operator=(LinkedList& orig){
         return *this;
     }
 }
+Node* LinkedList::mergeSort(Node* head){
+    if(head == nullptr || head->next == nullptr){
+        return head;
+    }
+    Node* middle = getMiddle(head);
+    Node* nextOfMiddle = middle->next;
+    middle->next = nullptr;
+    Node* left = mergeSort(head);
+    Node* right = mergeSort(nextOfMiddle);
+    Node* sortedList = merge(left, right);
+    return sortedList;
+}
+Node* LinkedList::getMiddle(Node* head){
+    if(head ==nullptr){
+        return head;
+    }
+    Node* slow = head;
+    Node* fast = head->next;
+    while(fast != nullptr && fast->next != nullptr){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+Node* LinkedList::merge(Node* left, Node* right){
+    if(left == nullptr){
+        return right;
+    }
+    if(right == nullptr){
+        return left;
+    }
+    Node temp;
+    Node *start = &temp;
+    while (left!= nullptr && right != nullptr)
+    {
+        if(left->data <= right->data){
+            start->next = left;
+            left = left->next;
+        }
+        else{
+            start->next = right;
+            right = right->next;
+        }
+
+        start = start->next;
+    }
+    if(left != nullptr){
+        start->next = left;
+    }
+    else{
+        start->next = right;
+    }
+    return temp.next;
+}
