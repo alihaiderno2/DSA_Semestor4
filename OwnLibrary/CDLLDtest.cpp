@@ -16,4 +16,8 @@ int main(){
     list1.display();
     CDLLD list2(list1);
     list2.display();
+    CDLLD list3;
+    list3.shuffleMerge(list1,list2);
+    list3.reverse();
+    list3.display();
 }
