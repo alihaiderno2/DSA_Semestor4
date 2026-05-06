@@ -5,6 +5,8 @@ class LinkedList
     private:
         Node* head;
         int findMin(Node* curr);
+        Node* mergeSort(Node* head);
+        int countEvens(Node* curr);
     public:
         LinkedList();
         void display();
@@ -19,7 +21,7 @@ class LinkedList
         ~LinkedList();
         LinkedList(LinkedList&);
         LinkedList& operator=(LinkedList& orig);
-        Node* mergeSort(Node* head);
+        void mergeSort();
         Node* getMiddle(Node* head);
         Node* merge(Node* left, Node* right);
         Node* getHead(){
@@ -32,4 +34,7 @@ class LinkedList
         void reverse();
         int removeAll(int val);
         int findMin();
+        int countEvens();
+        void bubbleSort();
+        int countNodes();
 };

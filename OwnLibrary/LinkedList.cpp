@@ -433,7 +433,7 @@ int LinkedList::findMin(Node *curr)
 {
     if (curr == nullptr)
     {
-        return 999;
+        return -999;
     }
     else
     {
@@ -445,6 +445,70 @@ int LinkedList::findMin(Node *curr)
         else
         {
             return curr->data;
+        }
+    }
+}
+void LinkedList::mergeSort()
+{
+    head = mergeSort(head);
+}
+int LinkedList::countEvens()
+{
+    return countEvens(head);
+}
+int LinkedList::countEvens(Node *curr)
+{
+    if (curr == nullptr)
+    {
+        return 0;
+    }
+    else
+    {
+        int count = countEvens(curr->next);
+        if (curr->data % 2 == 0)
+        {
+            count++;
+        }
+        return count;
+    }
+}
+int LinkedList::countNodes(){
+    int count = 0;
+    Node* temp = head;
+    while(temp != nullptr){
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+void LinkedList::bubbleSort(){
+    if(head == nullptr || head->next == nullptr){
+        return;
+    }
+    int total = countNodes();
+    for(int i = total -1;i >0 ;i--){
+        Node* temp = head;
+        Node* prev = nullptr;
+        for(int j = 0;j<i;j++){
+            if(temp->data > temp->next->data){
+                Node* nextNode = temp->next;
+                Node* theLast = temp->next->next;
+                if(prev == nullptr){
+                    head = nextNode;
+                    nextNode->next = temp;
+                    temp->next = theLast;
+                }
+                else{
+                    prev->next = nextNode;
+                    nextNode->next = temp;
+                    temp->next = theLast;
+                }
+                prev = nextNode;
+            }
+            else{
+                prev = temp;
+                temp = temp->next;
+            }
         }
     }
 }
