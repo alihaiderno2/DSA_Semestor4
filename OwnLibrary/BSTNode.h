@@ -8,4 +8,5 @@ class BSTNode
         BSTNode* right;
     public:
         BSTNode();
+        BSTNode(int val);
 };
