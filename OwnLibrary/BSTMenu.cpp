@@ -89,5 +89,12 @@ int main(){
         }
     }
     while(choice >= 1 && choice <= 9);
+
+    BST tree;
+    int arr[11] = {7,10,14,20,36,47,55,63,72,89,92};
+    tree.createBalancedTree(arr,0,10);
+    tree.displayInOrder();
+    tree.displayPostOrder();
+    tree.displayPreOrder();
     return 0;
 }

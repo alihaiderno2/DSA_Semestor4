@@ -1,114 +1,166 @@
-# include "BST.h"
-# include <iostream>
+#include "BST.h"
+#include <iostream>
 using namespace std;
-BST::BST(){
+BST::BST()
+{
     root = nullptr;
 }
-bool BST::Search(int val){
-    BSTNode* temp = root;
-    while(temp != nullptr){
-        if(temp->data == val){
+bool BST::Search(int val)
+{
+    BSTNode *temp = root;
+    while (temp != nullptr)
+    {
+        if (temp->data == val)
+        {
             return true;
         }
-        else if(temp->data > val){
+        else if (temp->data > val)
+        {
             temp = temp->left;
         }
-        else{
+        else
+        {
             temp = temp->right;
         }
     }
     return false;
 }
-void BST::displayInOrder(BSTNode* curr){
-    if(curr == nullptr){
+bool BST::recSearch(int val)
+{
+    return recSearch(root, val);
+}
+bool BST::recSearch(BSTNode *curr, int val)
+{
+    if (curr == nullptr)
+    {
+        return false;
+    }
+    if (curr->data == val)
+    {
+        return true;
+    }
+    if (curr->data > val)
+    {
+        return recSearch(curr->left, val);
+    }
+    else
+    {
+        return recSearch(curr->right, val);
+    }
+}
+void BST::displayInOrder(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
         return;
     }
     displayInOrder(curr->left);
     cout << curr->data << " ";
     displayInOrder(curr->right);
 }
-void BST::displayPreOrder(BSTNode* curr){
-    if(curr == nullptr){
+void BST::displayPreOrder(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
         return;
     }
     cout << curr->data << " ";
     displayPreOrder(curr->left);
     displayPreOrder(curr->right);
 }
-void BST::displayPostOrder(BSTNode* curr){
-    if(curr == nullptr){
+void BST::displayPostOrder(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
         return;
     }
     displayPostOrder(curr->left);
     displayPostOrder(curr->right);
     cout << curr->data << " ";
 }
-void BST::displayInOrder(){
+void BST::displayInOrder()
+{
     displayInOrder(root);
     cout << endl;
 }
-void BST::displayPreOrder(){
+void BST::displayPreOrder()
+{
     displayPreOrder(root);
     cout << endl;
 }
-void BST::displayPostOrder(){
-     displayPostOrder(root);
-        cout << endl;
+void BST::displayPostOrder()
+{
+    displayPostOrder(root);
+    cout << endl;
 }
-bool BST::insert(int val){
-    BSTNode* newNode = new BSTNode;
+bool BST::insert(int val)
+{
+    BSTNode *newNode = new BSTNode;
     newNode->data = val;
-    BSTNode* curr = root;
-    BSTNode* prnt = nullptr;
+    BSTNode *curr = root;
+    BSTNode *prnt = nullptr;
 
-    while(curr != nullptr){
+    while (curr != nullptr)
+    {
         prnt = curr;
-        if(val == curr->data){
+        if (val == curr->data)
+        {
             delete newNode;
             return false;
         }
-        else if(val < curr->data){
-            curr= curr->left;
+        else if (val < curr->data)
+        {
+            curr = curr->left;
         }
-        else{
+        else
+        {
             curr = curr->right;
         }
     }
     // When tree is empty
-    if(prnt == nullptr){
+    if (prnt == nullptr)
+    {
         root = newNode;
         return true;
     }
-    if(val > prnt->data){
+    if (val > prnt->data)
+    {
         prnt->right = newNode;
     }
-    else{
+    else
+    {
         prnt->left = newNode;
     }
     return true;
-
 }
-bool BST::remove(int val){
-    BSTNode* curr = root;
-    BSTNode* prnt = nullptr;
+bool BST::remove(int val)
+{
+    BSTNode *curr = root;
+    BSTNode *prnt = nullptr;
 
-    while(curr != nullptr && curr->data != val){
+    while (curr != nullptr && curr->data != val)
+    {
         prnt = curr;
-        if(val < curr->data){
+        if (val < curr->data)
+        {
             curr = curr->left;
         }
-        else {
+        else
+        {
             curr = curr->right;
         }
     }
-    if(curr == nullptr){
+    if (curr == nullptr)
+    {
         return false;
     }
     // Conversion of Degree 2 to Degree 1
-    if(curr->left != nullptr && curr->right != nullptr ){
-        BSTNode* successor = curr->right;
-        BSTNode* prntSuc = curr;
-        while(successor->left != nullptr){
+    if (curr->left != nullptr && curr->right != nullptr)
+    {
+        BSTNode *successor = curr->right;
+        BSTNode *prntSuc = curr;
+        while (successor->left != nullptr)
+        {
             prntSuc = successor;
             successor = successor->left;
         }
@@ -118,19 +170,25 @@ bool BST::remove(int val){
         prnt = prntSuc;
     }
     // Deletion of Degree 1 or 0
-    BSTNode* child ;
-    if(curr->left != nullptr){
+    BSTNode *child;
+    if (curr->left != nullptr)
+    {
         child = curr->left;
     }
-    else{
+    else
+    {
         child = curr->right;
     }
-    if(prnt == nullptr){
+    if (prnt == nullptr)
+    {
         root = child;
-    }else if(curr == prnt->left){
+    }
+    else if (curr == prnt->left)
+    {
         prnt->left = child;
     }
-    else{
+    else
+    {
         prnt->right = child;
     }
 
@@ -139,35 +197,44 @@ bool BST::remove(int val){
 
     return true;
 }
-void BST::levelOrderTraversal(){
+void BST::levelOrderTraversal()
+{
     levelOrderTraversal(root);
 }
-void BST::levelOrderTraversal(BSTNode* curr){
-    if(curr == nullptr){
+void BST::levelOrderTraversal(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
         return;
     }
     LinkedQueueForBSTNode q;
     q.enqueue(curr);
-    while(!q.isEmpty()){
-        BSTNode* temp;
+    while (!q.isEmpty())
+    {
+        BSTNode *temp;
         q.dequeue(temp);
-        cout<<temp->data<<" ";
-        if(temp->left != nullptr){
+        cout << temp->data << " ";
+        if (temp->left != nullptr)
+        {
             q.enqueue(temp->left);
         }
-        if(temp->right != nullptr){
+        if (temp->right != nullptr)
+        {
             q.enqueue(temp->right);
         }
     }
 
     cout << endl;
 }
-BST::~BST(){
+BST::~BST()
+{
     deleteTree(root);
     root = nullptr;
 }
-void BST::deleteTree(BSTNode* curr){
-    if(curr == nullptr){
+void BST::deleteTree(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
         return;
     }
     deleteTree(curr->left);
@@ -175,136 +242,141 @@ void BST::deleteTree(BSTNode* curr){
     delete curr;
     curr = nullptr;
 }
-BST::BST(const BST& other){
+BST::BST(const BST &other)
+{
     root = copyTree(other.root);
 }
-BST& BST::operator=(const BST& other){
-    if(this == &other){
+BST &BST::operator=(const BST &other)
+{
+    if (this == &other)
+    {
         return *this;
     }
     deleteTree(root);
     root = copyTree(other.root);
     return *this;
 }
-BSTNode* BST::copyTree(BSTNode* curr){
-    if(curr == nullptr){
+BSTNode *BST::copyTree(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
         return nullptr;
     }
-    BSTNode* newNOde = new BSTNode(curr->data);
+    BSTNode *newNOde = new BSTNode(curr->data);
     newNOde->left = copyTree(curr->left);
     newNOde->right = copyTree(curr->right);
     return newNOde;
 }
-bool BST::findMin(int& val){
+bool BST::findMin(int &val)
+{
     return findMin(root, val);
 }
-bool BST::findMin(BSTNode* curr, int& val){
-    if(curr == nullptr){
+bool BST::findMin(BSTNode *curr, int &val)
+{
+    if (curr == nullptr)
+    {
         return false;
     }
-    while(curr->left != nullptr){
+    while (curr->left != nullptr)
+    {
         curr = curr->left;
     }
     val = curr->data;
     return true;
 }
-bool BST::findMax(int& val){
+bool BST::findMax(int &val)
+{
     return findMax(root, val);
 }
-bool BST::findMax(BSTNode* curr, int& val){
-    if(curr == nullptr){
+bool BST::findMax(BSTNode *curr, int &val)
+{
+    if (curr == nullptr)
+    {
         return false;
     }
-    while(curr->right != nullptr){
+    while (curr->right != nullptr)
+    {
         curr = curr->right;
     }
     val = curr->data;
     return true;
 }
-int BST::getHeight(){
-    return getHeight(root);
-}
-int BST::getHeight(BSTNode* curr){
-    if(curr == nullptr){
-        return 0;
-    }
-    int leftHeight = getHeight(curr->left);
-    int rightHeight = getHeight(curr->right);
-    if(leftHeight > rightHeight){
-        return leftHeight + 1;
-    }
-    else{
-        return rightHeight + 1;
-    }
-}
-int BST::countNodes(){
-    return countNodes(root);
-}
-int BST::countNodes(BSTNode* curr){
-    if(curr == nullptr){
-        return 0;
-    }
-    int leftCount = countNodes(curr->left);
-    int rightCount = countNodes(curr->right);
-    return leftCount + rightCount + 1;
-}
-int BST::getSuccessor(int val){
+int BST::getSuccessor(int val)
+{
     return getSuccessor(root, val);
 }
-int BST::getSuccessor(BSTNode* curr,int val){
-    if(curr == nullptr){
+int BST::getSuccessor(BSTNode *curr, int val)
+{
+    if (curr == nullptr)
+    {
         return -1;
     }
-    BSTNode* successor = nullptr;
-    while(curr != nullptr && curr->data != val){
-        if(val < curr->data){
+    BSTNode *successor = nullptr;
+    while (curr != nullptr && curr->data != val)
+    {
+        if (val < curr->data)
+        {
             curr = curr->left;
         }
-        else{
+        else
+        {
             curr = curr->right;
         }
     }
-    if(curr == nullptr){
+    if (curr == nullptr)
+    {
         return -1;
     }
-    if(curr->right == nullptr){
+    if (curr->right == nullptr)
+    {
         return -1;
     }
     successor = curr->right;
-    while(successor->left != nullptr){
+    while (successor->left != nullptr)
+    {
         successor = successor->left;
     }
     return successor->data;
 }
-int BST::getPredecessor(int val){
+int BST::getPredecessor(int val)
+{
     return getPredecessor(root, val);
 }
-int BST::getPredecessor(BSTNode* curr,int val){
-    if(curr == nullptr){
+int BST::getPredecessor(BSTNode *curr, int val)
+{
+    if (curr == nullptr)
+    {
         return -1;
     }
-    BSTNode* predecessor = nullptr;
-    while(curr != nullptr && curr->data != val){
-        if(val < curr->data){
+    BSTNode *predecessor = nullptr;
+    while (curr != nullptr && curr->data != val)
+    {
+        if (val < curr->data)
+        {
             curr = curr->left;
         }
-        else{
+        else
+        {
             curr = curr->right;
         }
     }
-    if(curr == nullptr){
+    if (curr == nullptr)
+    {
         return -1;
     }
-    if(curr->left == nullptr){
+    if (curr->left == nullptr)
+    {
         return -1;
     }
     predecessor = curr->left;
-    while(predecessor->right != nullptr){
+    while (predecessor->right != nullptr)
+    {
         predecessor = predecessor->right;
     }
     return predecessor->data;
 }
-void BST::menu(){
+void BST::menu()
+{
     cout << "1. Insert" << endl;
     cout << "2. Remove" << endl;
     cout << "3. Search" << endl;
@@ -322,4 +394,102 @@ void BST::menu(){
     int choice;
     int val;
     
+}
+// getHeight
+int BST::getHeight()
+{
+    return getHeight(root);
+}
+int BST::getHeight(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
+        return 0;
+    }
+    int leftHeight = getHeight(curr->left);
+    int rightHeight = getHeight(curr->right);
+    if (leftHeight > rightHeight)
+    {
+        return leftHeight + 1;
+    }
+    else
+    {
+        return rightHeight + 1;
+    }
+}
+void BST::createBalancedTree(int* arr,int start,int end){
+    if(root != nullptr){
+        deleteTree(root);
+    }
+    root = createBalancedTreeHelper(arr, start, end);
+}
+BSTNode* BST::createBalancedTreeHelper (int* arr, int start, int end){
+    if(start > end){
+        return nullptr;  
+    }
+    int mid = (start+end)/2;
+    BSTNode* newNode = new BSTNode(arr[mid]);
+    newNode->left = createBalancedTreeHelper(arr,start,mid-1);
+    newNode->right = createBalancedTreeHelper(arr,mid+1,end);
+    return newNode;
+}
+int BST::findMin(){
+    BSTNode* curr = root;
+    if(curr == nullptr){
+        return -1;
+    }
+    while(curr->left != nullptr){
+        curr = curr->left;
+    }
+    return curr->data;
+
+}
+int BST::findMax(){
+    BSTNode* curr = root;
+    if(curr == nullptr){
+        return -1;
+    }
+    while(curr->right != nullptr){
+        curr = curr->right;
+    }
+    return curr->data;
+}
+int BST::countNodes()
+{
+    return countNodes(root);
+}
+int BST::countNodes(BSTNode *curr)
+{
+    if (curr == nullptr)
+    {
+        return 0;
+    }
+    int leftCount = countNodes(curr->left);
+    int rightCount = countNodes(curr->right);
+    return leftCount + rightCount + 1;
+    // return countNodes(curr->left) + countNodes(curr->right) + 1;
+}
+int BST::findMinRec(){
+    return findMinRec(root);
+}
+int BST::findMaxRec(){
+    return findMaxRec(root);
+}
+int BST::findMaxRec(BSTNode* b){
+    if(b == nullptr){
+        return -1;
+    }
+    if(b->right == nullptr){
+        return b->data;
+    }
+    return findMaxRec(b->right);
+}
+int BST::findMinRec(BSTNode* b){
+    if(b == nullptr){
+        return -1;
+    }
+    if(b->left == nullptr){
+        return b->data;
+    }
+    return findMinRec(b->left);
 }

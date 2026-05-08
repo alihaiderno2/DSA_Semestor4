@@ -16,6 +16,10 @@ class BST{
         int countNodes(BSTNode* curr);
         int getSuccessor(BSTNode* curr, int val);
         int getPredecessor(BSTNode* curr, int val);
+        bool recSearch(BSTNode* curr,int val);
+        BSTNode* createBalancedTreeHelper (int* arr, int start, int end);
+        int findMinRec(BSTNode* b);
+        int findMaxRec(BSTNode* b);
     public:
         BST();
         bool Search(int val);
@@ -35,4 +39,10 @@ class BST{
         int getSuccessor(int val);
         int getPredecessor(int val);
         void menu();
+        bool recSearch(int val);
+        void createBalancedTree (int* arr, int start, int end);
+        int findMin();
+        int findMax();
+        int findMinRec();
+        int findMaxRec();
 };
