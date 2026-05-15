@@ -37,4 +37,10 @@ class LinkedList
         int countEvens();
         void bubbleSort();
         int countNodes();
-};
+        void selectionSort();
+        void insertionSort();
+        void quickSort();
+        Node* quickSort(Node* head);
+        Node* getTail(Node* curr);
+        void shuffleMerge(LinkedList& list1, LinkedList& list2);
+    };

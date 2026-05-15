@@ -491,25 +491,25 @@ bool CDLLD::merge(CDLLD &list1, CDLLD &list2)
         DNode *p2 = list2.head.next;
         DNode *p3 = &head;
         while (p1 != &list1.head && p2 != &list2.head)
-        {   
+        {
             if(p1->data <= p2->data){
                 p3->next = p1;
-                
+
                 DNode* temp = p1->next;
                 p1->prev->next = p1->next;
                 p1->next->prev = p1->prev;
-                
+
                 p1->prev = p3;
                 p3  = p1;
                 p1 = temp;
             }
             else{
                 p3->next = p2;
-                
+
                 DNode* temp = p2->next;
                 p2->prev->next = p2->next;
                 p2->next->prev = p2->prev;
-                
+
                 p2->prev = p3;
                 p3 = p2;
                 p2 = temp;
@@ -582,7 +582,35 @@ void CDLLD::insertionSort(){
             j->next = temp;
             temp->prev = j;
         }
-
         temp = temp2;
+    }
+}
+void CDLLD::selectionSort(){
+    if(head.next == &head){
+        return;
+    }
+    DNode* temp = head.next;
+    while(temp != &head){
+        DNode* j = temp->next;
+        DNode* min = temp;
+        while(j != &head){
+            if(j->data < min->data){
+                min = j;
+            }
+            j = j->next;
+        }
+        if(min != temp){
+            min->prev->next = min->next;
+            min->next->prev = min->prev;
+            min->next = temp;
+            min->prev = temp->prev;
+
+            temp->prev->next = min;
+            temp->prev = min;
+        }
+        else
+        {
+            temp = temp->next;
+        }
     }
 }

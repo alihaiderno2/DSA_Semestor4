@@ -512,3 +512,181 @@ void LinkedList::bubbleSort(){
         }
     }
 }
+void LinkedList::selectionSort(){
+    if(head == nullptr){
+        return ;
+    }
+    int iter = 0;
+    Node* curr = head;
+    Node* newList = head;
+    while(curr != nullptr){
+        Node* currNext = curr->next;
+        Node* prev = curr;
+        Node* minPrev= curr;
+        Node* min = curr;
+        while(currNext != nullptr){
+            if(currNext->data < min->data){
+                minPrev = prev;
+                min = currNext;
+            }
+            prev = currNext;
+            currNext = currNext->next;
+            
+        }
+        if(iter == 0){
+            if(head != min){
+                minPrev->next = min->next;
+                head = min;
+                newList = head;
+            }
+            else{
+                newList = curr;
+                curr = curr->next;
+            }
+            iter++;
+        }
+        else{
+            if(min != curr){
+                newList->next = min;
+                minPrev->next = min->next;
+                newList = min;
+            }
+            else{
+                newList->next = curr;
+                newList = newList->next;
+                curr = curr->next;
+            }
+        }
+    }
+}
+void LinkedList::insertionSort(){
+    if(head == nullptr || head->next == nullptr){
+        return;
+    }
+    Node* sorted = nullptr;
+    Node* curr = head;
+    while(curr != nullptr){
+        Node* currNext = curr->next;
+        if(sorted == nullptr  || sorted->data >= curr->data){
+            curr->next = sorted;
+            sorted = curr;
+        }
+        else{
+            Node* temp = sorted;
+            while(temp->next != nullptr && temp->next->data < curr->data){
+                temp = temp->next;
+            }
+            curr->next = temp->next;
+            temp->next = curr;
+        }
+        curr = currNext;
+    }
+    head = sorted;
+}
+void LinkedList::quickSort(){
+    if(head == nullptr || head->next == nullptr){
+        return;
+    }
+    Node* tail = head;
+    while(tail->next != nullptr){
+        tail = tail->next;
+    }
+    quickSort(head);
+}
+Node* LinkedList::quickSort(Node* listHead){
+    if(listHead == nullptr || listHead->next == nullptr){
+        return listHead;
+    }
+    Node* pivot = listHead;
+    Node* curr = listHead->next;
+    pivot->next = nullptr;
+
+    Node* leftHead = nullptr;
+    Node* leftTail = nullptr;
+    Node* rightHead = nullptr;
+    Node* rightTail = nullptr;
+
+    while(curr != nullptr){
+        Node* currNext = curr->next;
+        curr->next = nullptr;
+        if(curr->data < pivot->data){
+            if(leftHead == nullptr){
+                leftHead = curr;
+                leftTail = curr;
+            }
+            else{
+                leftTail->next = curr;
+                leftTail = curr;
+            }
+        }
+        else{
+            if(rightHead == nullptr){
+                rightHead = curr;
+                rightTail = curr;
+            }
+            else{
+                rightTail->next = curr;
+                rightTail = curr;
+            }
+        }
+        curr = currNext;
+    }
+    leftHead = quickSort(leftHead);
+    rightHead = quickSort(rightHead);
+
+    if(leftHead == nullptr){
+        pivot->next = rightHead;
+        return pivot;
+    }
+    else{
+        Node* temp = leftHead;
+        leftTail = getTail(temp);
+        temp->next = pivot;
+        pivot->next = rightHead;
+        return leftHead;
+    }
+
+}
+Node* LinkedList::getTail(Node* curr) {
+    while (curr != nullptr && curr->next != nullptr) {
+        curr = curr->next;
+    }
+    return curr;
+}
+void LinkedList::shuffleMerge(LinkedList& list1, LinkedList& list2){
+    if(list1.head == nullptr && list2.head == nullptr){
+        return ;
+    }
+    else if(list1.head == nullptr){
+        head = list2.head;
+        list2.head = nullptr;
+        return;
+    }
+    else if(list2.head == nullptr){
+        head = list1.head;
+        list1.head =nullptr;
+        return ;
+    }
+    else{
+        head = list1.head;
+        head->next = list2.head;
+
+        Node* curr = head->next;
+        Node* p1 = list1.head->next;
+        Node* p2 = list2.head->next;
+
+        while(p1 != nullptr && p2 != nullptr){
+            curr->next = p1;
+            curr = curr->next;
+            curr->next = p2;
+            curr = curr->next;
+
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+        curr->next = nullptr;
+        
+        list1.head = nullptr;
+        list2.head = nullptr;
+    }
+}

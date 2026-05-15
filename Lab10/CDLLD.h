@@ -32,4 +32,5 @@ class CDLLD{
         int countNodes(DNode* curr);
         int countNodes();
         void insertionSort();
+        void selectionSort();
 };
